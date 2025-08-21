@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+
+/* ---------------------------
+   THEME VARIABLES
+   --------------------------- */
+
+/* Dark (default) */
+:root,
+html.theme-dark {
+  --paper: #1e1e22;
+  --ink: #121417;
+
+  /* Text */
+  --text: #e5e7eb;          /* default readable text on dark */
+  --text-muted: rgba(229,231,235,0.75);
+  --heading: #ffffff;
+
+  /* Surfaces */
+  --card-bg: rgba(255,255,255,0.06);
+  --card-border: rgba(255,255,255,0.12);
+  --surface: rgba(18,20,23,0.60); /* navbar/footer glass */
+
+  /* Inputs */
+  --input-bg: rgba(255,255,255,0.10);
+  --input-border: rgba(255,255,255,0.40);
+
+  /* Decorative / background */
+  --grid-opacity: 0.20;
+
+  /* Accent behavior (DARK = PURPLE) */
+  --accent: #9b59b6;        /* nav hover/active, switch icon, etc. */
+}
+
+/* Light (creme / very light gray) */
+html.theme-light {
+  --paper: #f5f3ee;         /* warm, not white */
+  --ink: #ffffff;
+
+  /* Text */
+  --text: #111827;          /* gray-900 for strong readability */
+  --text-muted: rgba(17,24,39,0.75);
+  --heading: #0b1220;
+
+  /* Surfaces */
+  --card-bg: rgba(255,255,255,0.90);
+  --card-border: rgba(3,7,18,0.10);
+  --surface: rgba(255,255,255,0.80);
+
+  /* Inputs */
+  --input-bg: rgba(255,255,255,0.95);
+  --input-border: rgba(3,7,18,0.12);
+
+  /* Decorative / background */
+  --grid-opacity: 0.08;
+
+  /* Accent behavior (LIGHT = BLUE) */
+  --accent: #0ea5e9;        /* sky-500 */
+}
+
+/* ---------------------------
+   BASE TYPOGRAPHY / SURFACES
+   --------------------------- */
+
+body { background-color: var(--paper); color: var(--text); }
+h1,h2,h3,h4,h5,h6 { color: var(--heading); }
+
+/* dynamic accents used by some effects */
+:root {
+  --acc1: 24,188,156;  /* teal */
+  --acc2: 51,177,255;  /* sky  */
+}
+
+/* Glass surface for navbar/footer (keeps both in-sync with theme) */
+.glass { @apply backdrop-blur-xl border; background-color: var(--surface); border-color: var(--card-border); }
+
+/* Cards honor theme surfaces */
+.card {
+  @apply rounded-2xl shadow-soft border;
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+}
+
+/* ---------------------------
+   LINKS
+   --------------------------- */
+
+/* Gradient link looks great on dark… */
+.link {
+  @apply underline-offset-4;
+  background-image: linear-gradient(90deg, #33b1ff, #9b59b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.link:hover { text-decoration: underline; }
+
+/* …but on LIGHT we force solid blue for contrast */
+html.theme-light .link {
+  background-image: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  color: #0ea5e9; /* sky-500 */
+}
+
+/* Always-underlined variant for explicit CTAs (e.g., project title link) */
+.link-strong {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--accent), transparent 40%);
+  text-underline-offset: 3px;
+}
+
+/* ---------------------------
+   NAVBAR STATE (accent-driven)
+   --------------------------- */
+
+.navlink { @apply px-3 py-2 rounded-lg font-semibold transition-colors; color: var(--text-muted); }
+.navlink:hover { color: var(--accent); }
+.navlink[aria-current="page"] {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--accent), transparent 50%);
+}
+
+/* Theme switch should reflect accent color */
+.theme-toggle { color: var(--accent); }
+
+/* ---------------------------
+   HEADLINES (professional style)
+   --------------------------- */
+
+.headline {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem 1rem;
+  border-radius: .75rem;
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  font-weight: 800;
+  font-size: 1.5rem; /* ~text-2xl */
+  color: var(--heading);
+}
+.headline::before {
+  content: "";
+  width: 10px; height: 10px; border-radius: 9999px;
+  background: linear-gradient(90deg, rgb(var(--acc1)), rgb(var(--acc2)));
+}
+
+/* Keep legacy underline class in case anything still uses it */
+.section-title { @apply text-3xl font-extrabold tracking-tight relative inline-block; }
+.section-title::after {
+  content: ""; position: absolute; left: 0; bottom: -6px; height: 6px; width: 60%;
+  background: linear-gradient(90deg, #18BC9C, #33b1ff, #9b59b6);
+  border-radius: 9999px; filter: blur(2px);
+}
+
+/* ---------------------------
+   SPEECH BUBBLE TAIL (Home intro)
+   --------------------------- */
+
+.bubble-tail {
+  position: absolute; left: -8px; top: 50%; transform: translateY(-50%) rotate(45deg);
+  width: 16px; height: 16px; border-top-left-radius: 4px;
+  background-color: var(--card-bg);
+  border-left: 1px solid var(--card-border);
+  border-top: 1px solid var(--card-border);
+}
+
+/* ---------------------------
+   CHIPS / TAGS
+   --------------------------- */
+
+/* Make pills/badges clearly visible in *both* themes */
+.pill, .badge {
+  display: inline-flex; align-items: center;
+  border-radius: 9999px;
+  color: var(--text);
+}
+.pill { padding: .25rem .75rem; font-size: .875rem; /* text-sm */ }
+.badge { padding: .125rem .625rem; font-size: .75rem; /* text-xs */ }
+
+/* Theme-specific chip backgrounds for contrast */
+html.theme-dark .pill, html.theme-dark .badge {
+  background-color: rgba(255,255,255,0.12);
+}
+html.theme-light .pill, html.theme-light .badge {
+  background-color: rgba(0,0,0,0.06); /* visible on creme */
+}
+
+/* ---------------------------
+   FORMS
+   --------------------------- */
+
+/* --- Contact form error helpers --- */
+.input-error { border-color: #ef4444 !important; box-shadow: 0 0 0 3px rgba(239,68,68,0.15); }
+.field-error { font-size: .875rem; line-height: 1.25rem; color: #ef4444; }
+
+.input, .textarea {
+  @apply rounded-lg focus:outline-none focus:ring-4 focus:ring-primary/30;
+  padding: 0.5rem 1rem;
+  border-width: 1px;
+  background-color: var(--input-bg);
+  border-color: var(--input-border);
+  color: var(--text);
+}
+.input::placeholder, .textarea::placeholder {
+  color: color-mix(in oklab, var(--text), transparent 45%);
+}
+
+/* Ensure labels and tiny texts are readable in both themes */
+.form-label { color: var(--text); font-weight: 600; }
+
+/* ---------------------------
+   AURORA GRID
+   --------------------------- */
+
+html.theme-light .bg-grid { opacity: var(--grid-opacity) !important; }
+html.theme-dark  .bg-grid { opacity: var(--grid-opacity) !important; }
+
+/* ---------------------------
+   PROSE DEFAULT COLOR
+   --------------------------- */
+
+.prose, .prose p, .prose li { color: var(--text); }
+
+/* ---------------------------
+   BUTTONS
+   --------------------------- */
+
+.btn  { @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-black font-semibold hover:shadow-glow transition-all active:scale-[.98]; }
+.btn-lg { @apply px-6 py-3 text-base; }
+
+/* ---------------------------
+   “UTILITY” COMPAT STYLES
+   (so classes already in JSX do what you expect)
+   --------------------------- */
+
+/* Some JSX uses Tailwind-like slashed classes (not built-in). Provide them: */
+.text-body\/80 { color: var(--text-muted); }   /* used in Footer before */
+.text-white\/30 { color: rgba(255,255,255,0.30); } /* separator dot in dark footer */
+
+/* Optional aliases without slash if you want to switch later: */
+.text-body-80 { color: var(--text-muted); }
