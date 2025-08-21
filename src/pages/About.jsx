@@ -13,7 +13,7 @@ const paragraphs = [
 const skills = {
   Technical: ['C++', 'Python', 'Linux', 'PHP', 'MySQL', 'MongoDB', 'React Native'],
   Tools:     ['Git', 'VS Code', 'Excel', 'AI Agents', 'IntelliJ', 'Unity'],
-  'Soft Skills': ['Teamwork', 'Problem Solving', 'Communication', 'Creative Thinking']
+  'Soft Skills': ['Teamwork', 'Problem Solving', 'Communication', 'Research']
 }
 
 export default function About() {
