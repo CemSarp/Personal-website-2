@@ -245,3 +245,15 @@ html.theme-dark  .bg-grid { opacity: var(--grid-opacity) !important; }
 
 /* Optional aliases without slash if you want to switch later: */
 .text-body-80 { color: var(--text-muted); }
+
+/* Thin, theme-aware scrollbars (chromium/webkit + firefox) */
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklab, var(--accent), transparent 30%) transparent;
+}
+.thin-scrollbar::-webkit-scrollbar { width: 8px; }
+.thin-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--accent), transparent 30%);
+  border-radius: 9999px;
+}

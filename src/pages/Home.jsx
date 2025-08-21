@@ -23,8 +23,8 @@ export default function Home() {
             className="text-lg max-w-prose"
             style={{ color: 'var(--text)' }}
           >
-            Final-year Computer Engineering student passionate about crafting
-            digital products where design meets engineering.
+            I’m a senior Computer Engineering student passionate about building digital products that combine design and engineering.
+            I love the process of bringing ideas to life, turning concepts into intuitive, functional experiences that people actually enjoy using.
           </p>
         </div>
       </Section>

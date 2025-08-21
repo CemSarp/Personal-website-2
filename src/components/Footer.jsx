@@ -14,15 +14,14 @@ export default function Footer() {
 
   return (
     <footer className="glass">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 text-center text-xs sm:text-sm text-body/80 space-y-3">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4 text-center text-xs sm:text-sm text-body/80 space-y-3">
         <nav className="flex items-center justify-center gap-4 flex-wrap">
           <Item to="home">Home</Item>
           <Item to="about">About</Item>
           <Item to="projects">Projects</Item>
           <Item to="contact">Contact</Item>
-          <span className="text-white/30">•</span>
         </nav>
-        <p>Built with React. © 2025 Cem Sarp Takım</p>
+        <p>Built with React. © 2025 Cem Sarp</p>
       </div>
     </footer>
   )

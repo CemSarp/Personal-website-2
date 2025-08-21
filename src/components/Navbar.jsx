@@ -5,8 +5,16 @@ import linkedin from '../assets/linkedin.png'
 function scrollToId(id) {
   const el = document.getElementById(id)
   if (!el) return
-  el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+
+  // Grab the sticky header's height dynamically
+  const header = document.querySelector('header')
+  const offset = header ? header.getBoundingClientRect().height : 0
+
+  const y = el.getBoundingClientRect().top + window.pageYOffset - offset - 8 // small extra breathing room
+  window.scrollTo({ top: y, behavior: 'smooth' })
 }
+
+
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' })
 }

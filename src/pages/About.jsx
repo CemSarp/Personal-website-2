@@ -3,16 +3,17 @@ import TiltCard from '../components/effects/TiltCard.jsx'
 import cv from '../assets/Cem-Sarp-Takim-CV.pdf'
 
 const paragraphs = [
-  "I’m <strong>Cem Sarp</strong>, a 21 year old Computer Engineering student at Sabancı University with a strong interest in web development, data analytics, and technology that creates real impact.",
-  "Outside of academics I care about community involvement. Through Sabancı’s Civil Involvement Project, I mentored primary school students on creativity, communication, and children’s rights.",
-  "When I’m not building, I’m with friends, playing basketball, watching films, or being interrupted by my 8-year-old cat.",
-  "I’m always exploring ways to combine technical skills with meaningful purpose."
+  "I’m <strong>Cem Sarp</strong>, a 21 year old Computer Engineering student at Sabancı University with a passion for web development, data analytics, and creating new things.",
+  "Beyond academics, I value giving back to the community. Through Sabancı’s Civil Involvement Project, I had the chance to mentor primary school students, encouraging creativity, communication, and awareness of children’s rights.",
+  "Outside of building and learning, you’ll usually find me with friends, on the basketball court, watching films, or being interrupted by my cat.",
+  "I’m driven by the idea of using my technical skills to create meaningful, human centered solutions and I’m always looking for new opportunities to grow and contribute."
 ]
 
+
 const skills = {
-  Technical: ['C++', 'Python', 'Linux', 'React', 'React Native', 'Tailwind', 'MongoDB'],
-  Tools:     ['Git', 'VS Code', 'MS Office', 'Figma'],
-  'Soft Skills': ['Teamwork', 'Problem Solving', 'Communication', 'Product Thinking']
+  Technical: ['C++', 'Python', 'Linux', 'PHP', 'MySQL', 'MongoDB', 'React Native'],
+  Tools:     ['Git', 'VS Code', 'Excel', 'AI Agents', 'IntelliJ', 'Unity'],
+  'Soft Skills': ['Teamwork', 'Problem Solving', 'Communication', 'Creative Thinking']
 }
 
 export default function About() {
