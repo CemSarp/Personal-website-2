@@ -1,6 +1,12 @@
 import { useRef, useEffect } from 'react'
 
-export default function TiltCard({ className = '', glow = true, children }) {
+/**
+ *   className?: string
+ *   children: ReactNode
+ *   glow?: boolean (ignored; kept for backward compatibility)
+ *   tiltStrength?: number (default 3)
+ */
+export default function TiltCard({ className = '', children, glow, tiltStrength = 3 }) {
   const ref = useRef(null)
 
   useEffect(() => {
@@ -11,7 +17,7 @@ export default function TiltCard({ className = '', glow = true, children }) {
       window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     const isSmall = () => window.innerWidth < 768
-    let active = !(prefersReduced || isSmall()) // only enable on md+ or if user allows
+    let active = !(prefersReduced || isSmall())
 
     const onResize = () => {
       active = !(prefersReduced || isSmall())
@@ -25,13 +31,10 @@ export default function TiltCard({ className = '', glow = true, children }) {
       const y = e.clientY - rect.top
       const midX = rect.width / 2
       const midY = rect.height / 2
-      const rotateX = ((y - midY) / midY) * -3
-      const rotateY = ((x - midX) / midX) * 3
-      card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.005)`
-      if (glow) {
-        card.style.setProperty('--x', `${x}px`)
-        card.style.setProperty('--y', `${y}px`)
-      }
+      const rotateX = ((y - midY) / midY) * -tiltStrength
+      const rotateY = ((x - midX) / midX) * tiltStrength
+      card.style.transform =
+        `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.005)`
     }
 
     function reset() {
@@ -46,18 +49,15 @@ export default function TiltCard({ className = '', glow = true, children }) {
       card.removeEventListener('mouseleave', reset)
       window.removeEventListener('resize', onResize)
     }
-  }, [])
+  }, [tiltStrength])
 
   return (
     <div
       ref={ref}
       className={`card relative ${className}`}
       style={{
-        transition: 'transform .18s ease',
-        // Dynamic accent with softer alpha
-        backgroundImage: glow
-          ? 'radial-gradient(280px circle at var(--x) var(--y), rgba(var(--acc1),0.06), rgba(var(--acc2),0.05), transparent 60%)'
-          : undefined
+        transition: 'transform .18s ease'
+        // Note: NO backgroundImage here; per-card glow removed.
       }}
     >
       {children}

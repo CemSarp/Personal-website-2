@@ -46,7 +46,7 @@ export default function Home() {
             alt="Cem Sarp Takım"
             className="w-44 h-44 md:w-64 md:h-64 rounded-full object-cover ring-4"
             style={{
-              transform: 'rotate(90deg)',
+              //transform: 'rotate(90deg)',
               ringColor: 'rgba(255,255,255,0.18)'
             }}
           />
