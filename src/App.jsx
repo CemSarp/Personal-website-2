@@ -10,6 +10,8 @@ import CursorGlow from './components/CursorGlow.jsx'
 import AuroraDots from './components/AuroraDots.jsx'
 import ThemeSwitch from './components/ThemeSwitch.jsx'
 import { SpeedInsights } from '@vercel/speed-insights/react';
+import { Analytics } from "@vercel/analytics/react"
+
 
 export default function App() {
   useLocation()
@@ -51,6 +53,7 @@ export default function App() {
       <Footer />
 
       {/* Floating theme switch */}
+      <Analytics />
       <SpeedInsights />
       <ThemeSwitch />
     </div>
