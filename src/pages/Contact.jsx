@@ -151,7 +151,7 @@ export default function Contact() {
           </form>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            <a href="mailto:youremail@example.com" className="pill hover:opacity-90">Email me directly</a>
+            <a href="mailto:cemsarptakim@gmail.com" className="pill hover:opacity-90">Email me directly</a>
             <a
               href="https://www.linkedin.com/in/cem-sarp-takım-645803218/"
               target="_blank" rel="noreferrer"
