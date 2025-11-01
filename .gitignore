@@ -1,0 +1,19 @@
+# macOS system files
+.DS_Store
+
+# dependencies
+node_modules/
+
+# build outputs & caches
+dist/
+build/
+.vite/
+.next/
+out/
+.eslintcache
+*.log
+
+# deployment / tools
+.vercel/
+.netlify/
+.turbo/

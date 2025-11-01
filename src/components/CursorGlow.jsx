@@ -8,6 +8,10 @@ export default function CursorGlow() {
     const el = ref.current
     if (!el) return
 
+    // Skip on devices without a fine pointer (e.g., touchscreens)
+    const mq = window.matchMedia('(hover: hover) and (pointer: fine)')
+    if (!mq.matches) return
+
     function onMove(e) {
       const { clientX: x, clientY: y } = e
 
