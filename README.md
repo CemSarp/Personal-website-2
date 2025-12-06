@@ -6,6 +6,11 @@ A full redesign of the original static site using **React + Vite + Tailwind + Fr
 - **Routing**: `/`, `/about`, `/projects`, `/contact`
 - **Content**: *All text preserved exactly from the original site*
 
+## Security notice
+
+- This project is built with **Vite + React**, not Next.js, so the public RCE issue in React Server Components (CVE-2025-55182) does **not** apply here.
+- Vercel client libraries are pinned to known-good releases for analytics and Speed Insights compatibility (`@vercel/analytics@1.5.0`, `@vercel/speed-insights@1.2.0`).
+
 ## Local Development
 
 ```bash
