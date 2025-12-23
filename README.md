@@ -20,7 +20,7 @@ npm run build
 npm run preview
 ```
 
-## Deploy to Vercel (recommended)
+## Deploy to Vercel
 
 1. Push this folder to a new GitHub repo.
 2. On https://vercel.com, **New Project → Import GitHub Repo**.
@@ -30,23 +30,3 @@ npm run preview
 6. Deploy. (Add your custom domain if needed.)
 
 > Note: A `CNAME` file is not used on Vercel. Configure your domain in the Vercel dashboard.
-
-## Deploy to GitHub Pages (optional)
-
-### Option A — GitHub Actions
-Use a Vite + Pages action (e.g. `peaceiris/actions-gh-pages`).
-
-### Option B — gh-pages CLI
-```bash
-npm i -D gh-pages
-# add to package.json:
-# "predeploy": "npm run build",
-# "deploy": "gh-pages -d dist"
-npm run deploy
-```
-
-If you keep using a custom domain on GitHub Pages, add a `CNAME` file into `public/` containing your domain (e.g., `www.cemsarptakim.com`).
-
-## Assets
-- Images and PDF are under `src/assets/` (except `favicon.png` which is under `public/`)
-- Form uses your original Formspree endpoint.
