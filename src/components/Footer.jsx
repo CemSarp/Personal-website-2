@@ -6,12 +6,21 @@ export default function Footer() {
       </a>
     ) : (
       <button onClick={() => {
-        const el = document.getElementById(to); el && el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        if (to === 'home') {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        } else {
+          const el = document.getElementById(to)
+          if (el) {
+            const header = document.querySelector('header')
+            const offset = header ? header.getBoundingClientRect().height : 0
+            const y = el.getBoundingClientRect().top + window.pageYOffset - offset - 8
+            window.scrollTo({ top: y, behavior: 'smooth' })
+          }
+        }
       }} className="text-body/80 hover:text-[var(--accent)]">
         {children}
       </button>
     )
-
   return (
     <footer className="glass">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-4 text-center text-xs sm:text-sm text-body/80 space-y-3">

@@ -4,9 +4,9 @@ import { useRef, useEffect } from 'react'
  *   className?: string
  *   children: ReactNode
  *   glow?: boolean (ignored; kept for backward compatibility)
- *   tiltStrength?: number (default 3)
+ *   tiltStrength?: number (default 1.5)
  */
-export default function TiltCard({ className = '', children, glow, tiltStrength = 3 }) {
+export default function TiltCard({ className = '', children, glow, tiltStrength = 1.5 }) {
   const ref = useRef(null)
 
   useEffect(() => {

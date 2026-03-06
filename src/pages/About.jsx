@@ -1,6 +1,5 @@
 import Section from '../components/Section.jsx'
 import TiltCard from '../components/effects/TiltCard.jsx'
-import cv from '../assets/Cem-Sarp-Takim-CV.pdf'
 
 const paragraphs = [
   "I’m <strong>Cem Sarp</strong>, a 21 year old Computer Engineering student at Sabancı University with a passion for web development, data analytics, and creating new things.",
@@ -48,7 +47,7 @@ export default function About() {
               ))}
             </div>
 
-            <a href={cv} download="Cem-Sarp-Takim-CV.pdf" className="btn btn-lg mt-8">Download CV</a>
+            <a href="/Cem-Sarp-Takim-CV.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-lg mt-8">View CV</a>
           </TiltCard>
         </Section>
       </div>
