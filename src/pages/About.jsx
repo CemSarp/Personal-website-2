@@ -12,7 +12,7 @@ const paragraphs = [
 
 const skills = {
   Technical: ['C++', 'Python', 'Linux', 'PHP', 'MySQL', 'MongoDB', 'React Native'],
-  Tools:     ['Git', 'VS Code', 'Excel', 'AI Agents', 'IntelliJ', 'Unity'],
+  Tools: ['Git', 'VS Code', 'Excel', 'AI Agents', 'IntelliJ', 'Unity'],
   'Soft Skills': ['Teamwork', 'Problem Solving', 'Communication', 'Research']
 }
 
@@ -48,7 +48,7 @@ export default function About() {
               ))}
             </div>
 
-            <a href={cv} download className="btn btn-lg mt-8">Download CV</a>
+            <a href={cv} download="Cem_Sarp_CV.pdf" className="btn btn-lg mt-8">Download CV</a>
           </TiltCard>
         </Section>
       </div>
