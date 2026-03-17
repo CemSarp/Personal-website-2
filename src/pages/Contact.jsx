@@ -1,6 +1,7 @@
-import Section from '../components/Section.jsx'
 import TiltCard from '../components/effects/TiltCard.jsx'
 import { useState, useMemo } from 'react'
+import linkedin from '../assets/linkedin.png'
+import { Send } from 'lucide-react'
 
 export default function Contact() {
   const [values, setValues] = useState({ name: '', email: '', message: '' })
@@ -8,23 +9,20 @@ export default function Contact() {
   const [status, setStatus] = useState('idle')
   const [msg, setMsg] = useState('')
 
-  const emailOk = useMemo(() => {
-    // simple & safe email check
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())
-  }, [values.email])
+  const emailOk = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim()), [values.email])
 
   const errors = {
     name: values.name.trim() ? '' : 'Name is required.',
-    email: values.email.trim() ? (emailOk ? '' : 'Please enter a valid email.') : 'Email is required.',
-    message: values.message.trim() ? '' : 'Message is required.',
+    email: values.email.trim() ? (emailOk ? '' : 'Please enter a valid e-mail.') : 'Email is required.',
+    message: values.message.trim() ? '' : 'Message cannot be empty.',
   }
-
   const formValid = !errors.name && !errors.email && !errors.message
 
   function onChange(e) {
     const { name, value } = e.target
     setValues(v => ({ ...v, [name]: value }))
   }
+
   function onBlur(e) {
     const { name } = e.target
     setTouched(t => ({ ...t, [name]: true }))
@@ -33,11 +31,11 @@ export default function Contact() {
   async function handleSubmit(e) {
     e.preventDefault()
     setTouched({ name: true, email: true, message: true })
-
-    if (!formValid) return // block submission if invalid
+    if (!formValid) return
 
     setStatus('loading')
     setMsg('')
+
     const form = new FormData()
     form.append('name', values.name)
     form.append('email', values.email)
@@ -54,7 +52,10 @@ export default function Contact() {
 
       const opaque = res.type === 'opaque' || res.status === 0
       let data = null
-      if (!opaque) { try { data = await res.clone().json() } catch(_) {} }
+      if (!opaque) {
+        try { data = await res.clone().json() } catch (_) { }
+      }
+
       const success = opaque || (res.ok && (data?.ok === true || !data)) || res.status === 200
 
       if (success) {
@@ -63,12 +64,10 @@ export default function Contact() {
         setStatus('success')
         setMsg('Thanks! Your message has been sent.')
       } else {
-        const errText = (data && Array.isArray(data.errors) && data.errors.map(er => er.message).join(', ')) ||
-          'Something went wrong. Please try again.'
-        setStatus('error'); setMsg(errText)
+        setStatus('error')
+        setMsg((data?.errors?.map(er => er.message).join(', ')) || 'Something went wrong.')
       }
-    } catch (err) {
-      // Network issues in CORS contexts often still deliver the message.
+    } catch {
       setValues({ name: '', email: '', message: '' })
       setTouched({ name: false, email: false, message: false })
       setStatus('success')
@@ -77,91 +76,103 @@ export default function Contact() {
   }
 
   return (
-    <div className="space-y-8">
-      <Section>
-        <h2 className="headline">Get in Touch</h2>
-      </Section>
+    <main className="bg-[#020617] text-white min-h-screen pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+      <style>{`
+        @keyframes fade-up {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .contact-section { animation: fade-up .5s ease both; }
+      `}</style>
 
-      <Section delay={0.1}>
-        <TiltCard className="p-6 max-w-xl">
-          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-            {/* Name */}
-            <div className="flex flex-col gap-1">
-              <label htmlFor="name" className="form-label">Name</label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                className={`input ${touched.name && errors.name ? 'input-error' : ''}`}
-                value={values.name}
-                onChange={onChange}
-                onBlur={onBlur}
-                aria-invalid={!!(touched.name && errors.name)}
-                aria-describedby={touched.name && errors.name ? 'err-name' : undefined}
-              />
-              {touched.name && errors.name && <p id="err-name" className="field-error">{errors.name}</p>}
+      <div className="max-w-2xl mx-auto">
+        {/* Header */}
+        <div className="mb-10 text-center contact-section">
+          <h1 className="text-4xl sm:text-5xl font-bold">
+            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              Get in Touch
+            </span>
+          </h1>
+        </div>
+
+        <div className="contact-section" style={{ animationDelay: '0.1s' }}>
+          <TiltCard className="p-6 sm:p-8">
+            <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+              {/* Name */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="name" className="form-label">Name</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  className={`input ${touched.name && errors.name ? 'input-error' : ''}`}
+                  value={values.name}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  aria-invalid={!!(touched.name && errors.name)}
+                />
+                {touched.name && errors.name && <p className="field-error">{errors.name}</p>}
+              </div>
+
+              {/* Email */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="email" className="form-label">E-mail</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  className={`input ${touched.email && errors.email ? 'input-error' : ''}`}
+                  value={values.email}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  aria-invalid={!!(touched.email && errors.email)}
+                />
+                {touched.email && errors.email && <p className="field-error">{errors.email}</p>}
+              </div>
+
+              {/* Message */}
+              <div className="flex flex-col gap-1.5">
+                <label htmlFor="message" className="form-label">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  className={`textarea ${touched.message && errors.message ? 'input-error' : ''}`}
+                  value={values.message}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  aria-invalid={!!(touched.message && errors.message)}
+                />
+                {touched.message && errors.message && <p className="field-error">{errors.message}</p>}
+              </div>
+
+              <button
+                type="submit"
+                className="btn w-full justify-center"
+                disabled={status === 'loading' || !formValid}
+              >
+                {status === 'loading' ? 'Sending…' : 'Send Message'}
+                <Send size={16} />
+              </button>
+
+              {status === 'success' && <p className="text-emerald-400 text-sm">{msg}</p>}
+              {status === 'error' && <p className="text-red-400 text-sm">{msg}</p>}
+            </form>
+
+            <div className="mt-6 flex justify-center">
+              <a
+                href="https://www.linkedin.com/in/cem-sarp-takım-645803218/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 bg-[#0f1c2f] border border-cyan-400/25 text-cyan-300 text-sm hover:text-white hover:border-cyan-300/50 hover:bg-[#13243a] transition-all duration-300"
+              >
+                <img src={linkedin} alt="LinkedIn" className="h-4 w-4 object-contain" />
+                <span className="font-medium">Connect on LinkedIn</span>
+              </a>
             </div>
-
-            {/* Email */}
-            <div className="flex flex-col gap-1">
-              <label htmlFor="email" className="form-label">E-mail</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className={`input ${touched.email && errors.email ? 'input-error' : ''}`}
-                value={values.email}
-                onChange={onChange}
-                onBlur={onBlur}
-                aria-invalid={!!(touched.email && errors.email)}
-                aria-describedby={touched.email && errors.email ? 'err-email' : undefined}
-              />
-              {touched.email && errors.email && <p id="err-email" className="field-error">{errors.email}</p>}
-            </div>
-
-            {/* Message */}
-            <div className="flex flex-col gap-1">
-              <label htmlFor="message" className="form-label">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                className={`textarea ${touched.message && errors.message ? 'input-error' : ''}`}
-                value={values.message}
-                onChange={onChange}
-                onBlur={onBlur}
-                aria-invalid={!!(touched.message && errors.message)}
-                aria-describedby={touched.message && errors.message ? 'err-message' : undefined}
-              />
-              {touched.message && errors.message && <p id="err-message" className="field-error">{errors.message}</p>}
-            </div>
-
-            <button
-              type="submit"
-              className="btn"
-              disabled={status === 'loading' || !formValid}
-              aria-disabled={status === 'loading' || !formValid}
-              title={!formValid ? 'Please fill out all fields' : undefined}
-            >
-              {status === 'loading' ? 'Sending…' : 'Send'}
-            </button>
-
-            {status === 'success' && <p className="mt-2 text-emerald-500">{msg}</p>}
-            {status === 'error' && <p className="mt-2 text-red-500">{msg}</p>}
-          </form>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-              {/* <a href="mailto:cemsarptakim@gmail.com" className="pill hover:opacity-90">Email me directly</a> */}
-            <a
-              href="https://www.linkedin.com/in/cem-sarp-takım-645803218/"
-              target="_blank" rel="noreferrer"
-              className="pill hover:opacity-90"
-            >
-              Connect on LinkedIn
-            </a>
-          </div>
-        </TiltCard>
-      </Section>
-    </div>
+          </TiltCard>
+        </div>
+      </div>
+    </main>
   )
 }

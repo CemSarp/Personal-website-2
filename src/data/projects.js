@@ -1,5 +1,5 @@
 // src/data/projects.js
-import { MessageSquare, FileBarChart, Database } from 'lucide-react'
+import { MessageSquare, FileBarChart, Database, HeartHandshake } from 'lucide-react'
 import pureReport from '../assets/pure-csr-report.pdf'
 
 export const projects = [
@@ -53,4 +53,20 @@ export const projects = [
       'Admin & support views: filter tickets by status, view, update, comment and close them.',
     ],
   },
+
+  {
+    id: 'cip101-volunteer-project',
+    title: 'Civil Involvement Project (CIP101)',
+    icon: HeartHandshake,
+    tags: ['Volunteering', 'Mentorship', 'Education', 'Social Impact'],
+    summary:
+      'Contributed to a community-focused civil involvement project by mentoring primary school students from socio-economically disadvantaged areas near Sabancı University and supporting their personal development through interactive activities.',
+    bullets: [
+      'Mentored primary school students from socio-economically disadvantaged areas near Sabancı University.',
+      'Led activities designed to strengthen children’s rights awareness, communication skills, creativity, and self-confidence.',
+      'Facilitated workshops and interactive sessions to support students’ personal and social development.',
+      'Helped create a supportive, encouraging environment where students could express themselves more confidently and engage actively with peers.',
+    ],
+  }
+
 ]
