@@ -36,6 +36,7 @@ export const projects = [
   {
     id: 'xampp-mysql-marketplace',
     title: 'XAMPP MySQL Web App – Marketplace & Support',
+    href: 'https://github.com/CemSarp/Mysql-marketplace-webapp',
     icon: Database,
     tags: [
       'PHP',
