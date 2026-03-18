@@ -1,0 +1,23 @@
+[
+    {
+        "id": "cip101",
+        "name": "Civil Involvement Project (CIP101)",
+        "type": "Volunteering",
+        "summary": "Mentored primary school students from socio-economically disadvantaged areas near Sabancı University.",
+        "highlights": [
+            "Led activities promoting children’s rights, communication skills, creativity, and self-confidence.",
+            "Facilitated workshops and interactive sessions to enhance students' personal development."
+        ],
+        "source": "cv"
+    },
+    {
+        "id": "cakuf",
+        "name": "Organizer at CAKUF (Cakabey National Forum)",
+        "type": "Extracurricular",
+        "summary": "Contributed to event planning and coordination as part of the organizing team.",
+        "highlights": [
+            "Gained experience in logistics, communication, and team collaboration."
+        ],
+        "source": "cv"
+    }
+]

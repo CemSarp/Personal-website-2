@@ -1,0 +1,72 @@
+[
+    {
+        "id": "aselsan-image-processing",
+        "company": "ASELSAN",
+        "location": "Ankara, Turkey",
+        "role": "Image Processing Intern",
+        "period": "06/2025 – 07/2025",
+        "type": "Internship",
+        "summary": "Worked within the Image Processing Team of the Electro-Optical Systems (MEOS) department on an AI-based automation pipeline for object detection in infrared imagery.",
+        "highlights": [
+            "Evaluated and integrated open-source object detection models such as OWL-V2 and Florence-2.",
+            "Benchmarked pre-trained vision models using custom datasets, measuring detection accuracy, class generalizability, and inference speed.",
+            "Implemented prototype-level integrations that enabled near real-time detection and reduced manual data labeling workload."
+        ],
+        "technologies": [
+            "Computer Vision",
+            "OWL-V2",
+            "Florence-2",
+            "IR Imagery",
+            "Model Benchmarking",
+            "GUI Integration"
+        ],
+        "source": "cv"
+    },
+    {
+        "id": "ias-erp-consultancy",
+        "company": "IAS",
+        "location": "Izmir, Turkey",
+        "role": "ERP Consultancy Intern",
+        "period": "04/2025 – 05/2025",
+        "type": "Internship",
+        "summary": "Contributed to ERP implementation and customization processes within the consultancy department of caniasERP.",
+        "highlights": [
+            "Received training on PRJ, SYS, and DEV modules and on the proprietary TROIA development language.",
+            "Supported a company vehicle management application by creating database tables, classes, dialogs, and transactions.",
+            "Learned practical ERP consulting, system configuration, and client-oriented customization."
+        ],
+        "technologies": [
+            "caniasERP",
+            "TROIA",
+            "PRJ",
+            "SYS",
+            "DEV",
+            "Database Tables",
+            "Dialogs",
+            "Transactions"
+        ],
+        "source": "cv"
+    },
+    {
+        "id": "bnt-pro-network-systems",
+        "company": "BNT Pro",
+        "location": "Istanbul, Turkey",
+        "role": "Network Systems Intern",
+        "period": "07/2024 – 08/2024",
+        "type": "Internship",
+        "summary": "Assisted the Network and Security Team with day-to-day operations, troubleshooting, documentation, and cybersecurity-related observation.",
+        "highlights": [
+            "Supported basic system configuration, troubleshooting, and documentation.",
+            "Learned cybersecurity fundamentals through log monitoring, user access control, and simple vulnerability scans.",
+            "Observed system audits and security assessments to learn enterprise infrastructure best practices."
+        ],
+        "technologies": [
+            "Cybersecurity",
+            "Log Monitoring",
+            "Access Control",
+            "Vulnerability Scanning",
+            "Enterprise Infrastructure"
+        ],
+        "source": "cv"
+    }
+]

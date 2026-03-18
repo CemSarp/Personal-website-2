@@ -1,0 +1,41 @@
+{
+    "programmingAndData": [
+        "Python",
+        "C++",
+        "Java",
+        "MySQL"
+    ],
+    "dataScienceAndML": [
+        "Exploratory Data Analysis (EDA)",
+        "Classification and regression fundamentals",
+        "Model evaluation and validation"
+    ],
+    "systemsAndDevelopment": [
+        "Linux",
+        "Git",
+        "MongoDB",
+        "MySQL"
+    ],
+    "languages": [
+        {
+            "name": "English",
+            "level": "C1",
+            "extra": "IELTS: 8"
+        },
+        {
+            "name": "German",
+            "level": "A2"
+        },
+        {
+            "name": "Turkish",
+            "level": "Native"
+        }
+    ],
+    "softSkills": [
+        "Teamwork",
+        "Problem Solving",
+        "Communication",
+        "Research"
+    ],
+    "source": "cv+about"
+}

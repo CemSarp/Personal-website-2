@@ -1,22 +1,38 @@
 [
   {
     "question": "What is Cem's major?",
-    "answer": "Cem's major is Computer Engineering at Sabancı University."
+    "answer": "Cem is a Computer Science and Engineering student at Sabancı University."
   },
   {
     "question": "Does he have a minor?",
     "answer": "Yes. He has a minor in Business Analytics."
   },
   {
-    "question": "What are his main interests?",
-    "answer": "His main interests include AI, machine learning, computer vision, software engineering, data analytics, and building digital products."
+    "question": "What is his GPA?",
+    "answer": "His cumulative GPA is 3.5/4."
+  },
+  {
+    "question": "What is his English level?",
+    "answer": "His English level is C1 and his IELTS score is 8."
   },
   {
     "question": "Where did he intern?",
     "answer": "He has internship experience at ASELSAN, IAS, and BNT Pro."
   },
   {
+    "question": "What are his main interests?",
+    "answer": "His main interests include AI, machine learning, computer vision, software engineering, data analytics, and building digital products."
+  },
+  {
+    "question": "What technical skills does he have?",
+    "answer": "His skills include Python, C++, Java, MySQL, Linux, Git, MongoDB, EDA, and model evaluation."
+  },
+  {
+    "question": "Has he done volunteering?",
+    "answer": "Yes. Through CIP101, he mentored primary school students and led activities around communication, creativity, confidence, and children's rights."
+  },
+  {
     "question": "How can I contact him?",
-    "answer": "The best route is the contact section of cemsarptakim.com."
+    "answer": "Use the contact section on cemsarptakim.com."
   }
 ]
