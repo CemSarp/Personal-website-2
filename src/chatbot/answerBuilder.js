@@ -35,7 +35,7 @@ function buildExperienceAnswer(experiences) {
 function buildLowConfidenceAnswer() {
     return {
         answer:
-            'I do not have a reliable local answer for that yet. Try asking about education, GPA, coursework, internships, projects, skills, languages, volunteering, extracurriculars, or contact.',
+            "I don't know the answer to that. I only have information about Cem's education, internships, projects, skills, languages, volunteering, and contact details.",
         confidence: 0.2,
         sources: [],
     }

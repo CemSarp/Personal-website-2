@@ -1,4 +1,4 @@
-import { buildKnowledgeBase } from './knowledge'
+import { buildKnowledgeBase, STOP_WORDS } from './knowledge'
 
 const KNOWLEDGE_BASE = buildKnowledgeBase()
 
@@ -54,26 +54,45 @@ function detectIntent(question) {
 
 function scoreEntry(question, entry) {
     const q = normalize(question)
-    const questionTokens = tokenize(question)
+    const questionTokens = tokenize(question).filter((token) => !STOP_WORDS.has(token))
+    const questionTokensSet = new Set(questionTokens)
     const entryTokens = new Set(tokenize(entry.text))
 
     let score = 0
+    let hasMatch = false
 
     for (const keyword of entry.keywords || []) {
-        if (q.includes(normalize(keyword))) score += 7
+        if (questionTokensSet.has(keyword)) {
+            score += 7
+            hasMatch = true
+        }
     }
 
     for (const token of questionTokens) {
-        if (entryTokens.has(token)) score += 1.5
+        if (entryTokens.has(token)) {
+            score += 1.5
+            hasMatch = true
+        }
     }
 
     const intent = detectIntent(question)
-    if (intent && entry.topic === intent) score += 10
+    if (intent && entry.topic === intent) {
+        score += 10
+        hasMatch = true
+    }
 
-    if (intent === 'skills' && entry.topic === 'technology-project-link') score += 4
-    if (intent === 'projects' && entry.type === 'project') score += 4
+    if (intent === 'skills' && entry.topic === 'technology-project-link') {
+        score += 4
+        hasMatch = true
+    }
+    if (intent === 'projects' && entry.type === 'project') {
+        score += 4
+        hasMatch = true
+    }
 
-    score += entry.priority || 0
+    if (hasMatch) {
+        score += entry.priority || 0
+    }
 
     return score
 }

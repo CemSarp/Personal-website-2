@@ -26,6 +26,35 @@ function dedupe(list) {
     return [...new Set(list.filter(Boolean))]
 }
 
+export const STOP_WORDS = new Set([
+    'what', 'is', 'the', 'of', 'in', 'on', 'an', 'a', 'to', 'for', 'and', 'or', 'with', 'at', 'by', 'from', 'about',
+    'how', 'who', 'where', 'why', 'did', 'does', 'do', 'has', 'have', 'had', 'he', 'she', 'they', 'his', 'her', 'its',
+    'been', 'were', 'was', 'are', 'i', 'you', 'me', 'my', 'your', 'we', 'our', 'us', 'it', 'this', 'that', 'these', 'those',
+    'can', 'could', 'would', 'should', 'will', 'shall', 'then', 'there', 'their', 'also', 'but', 'not', 'only', 'more',
+    'as', 'into', 'against', 'between', 'during', 'through', 'before', 'after', 'above', 'below', 'up', 'down',
+    'out', 'off', 'over', 'under', 'again', 'further', 'once', 'here', 'when', 'all', 'any', 'both', 'each', 'few',
+    'most', 'other', 'some', 'such', 'no', 'nor', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'just', 'don', 'now'
+])
+
+export function cleanKeywords(list) {
+    const words = []
+    list.forEach(item => {
+        if (!item) return
+        const tokens = String(item)
+            .toLowerCase()
+            .replace(/[^a-z0-9çğıöşü\s/.-]/gi, ' ')
+            .split(/\s+/)
+            .filter(Boolean)
+        
+        tokens.forEach(token => {
+            if (!STOP_WORDS.has(token)) {
+                words.push(token)
+            }
+        })
+    })
+    return [...new Set(words)]
+}
+
 function buildTechToProjectLinks(projects) {
     const map = {}
 
@@ -79,7 +108,7 @@ export function buildKnowledgeBase() {
         title: 'Education',
         text: `${education.name} is a ${education.year} ${education.major} student at ${education.university} with a ${education.minor} minor. GPA: ${education.gpa}.`,
         answer: `${education.name} is a ${education.year} ${education.major} student at ${education.university} with a ${education.minor} minor. His cumulative GPA is ${education.gpa}.`,
-        keywords: [
+        keywords: cleanKeywords([
             'major',
             'minor',
             'university',
@@ -91,7 +120,7 @@ export function buildKnowledgeBase() {
             'business analytics',
             'sabancı',
             'sabanci'
-        ]
+        ])
     })
 
     entries.push({
@@ -103,7 +132,7 @@ export function buildKnowledgeBase() {
         title: 'Headline',
         text: education.headline,
         answer: education.headline,
-        keywords: ['headline', 'intro', 'summary', 'about', 'who is cem']
+        keywords: cleanKeywords(['headline', 'intro', 'summary', 'about', 'who is cem'])
     })
 
     entries.push({
@@ -115,7 +144,7 @@ export function buildKnowledgeBase() {
         title: 'Coursework',
         text: `Relevant coursework includes ${coursework.join(', ')}.`,
         answer: `Relevant coursework includes ${coursework.join(', ')}.`,
-        keywords: ['coursework', 'courses', 'classes', ...coursework.map((item) => normalize(item))]
+        keywords: cleanKeywords(['coursework', 'courses', 'classes', ...coursework.map((item) => normalize(item))])
     })
 
     entries.push({
@@ -127,7 +156,7 @@ export function buildKnowledgeBase() {
         title: 'Programming & Data Skills',
         text: `Programming and data skills: ${skills.programmingAndData.join(', ')}.`,
         answer: `Programming and data skills include ${skills.programmingAndData.join(', ')}.`,
-        keywords: ['skills', 'technical skills', 'programming', 'languages', ...skills.programmingAndData.map((item) => normalize(item))]
+        keywords: cleanKeywords(['skills', 'technical skills', 'programming', 'languages', ...skills.programmingAndData.map((item) => normalize(item))])
     })
 
     entries.push({
@@ -139,7 +168,7 @@ export function buildKnowledgeBase() {
         title: 'Data Science & Machine Learning Skills',
         text: `Data science and machine learning skills: ${skills.dataScienceAndML.join(', ')}.`,
         answer: `His data science and machine learning background includes ${skills.dataScienceAndML.join(', ')}.`,
-        keywords: ['machine learning', 'ml', 'data science', 'eda', 'model evaluation', 'validation', ...skills.dataScienceAndML.map((item) => normalize(item))]
+        keywords: cleanKeywords(['machine learning', 'ml', 'data science', 'eda', 'model evaluation', 'validation', ...skills.dataScienceAndML.map((item) => normalize(item))])
     })
 
     entries.push({
@@ -151,7 +180,7 @@ export function buildKnowledgeBase() {
         title: 'Systems & Development Skills',
         text: `Systems and development skills: ${skills.systemsAndDevelopment.join(', ')}.`,
         answer: `His systems and development skills include ${skills.systemsAndDevelopment.join(', ')}.`,
-        keywords: ['systems', 'development', 'linux', 'git', 'mongodb', 'mysql', ...skills.systemsAndDevelopment.map((item) => normalize(item))]
+        keywords: cleanKeywords(['systems', 'development', 'linux', 'git', 'mongodb', 'mysql', ...skills.systemsAndDevelopment.map((item) => normalize(item))])
     })
 
     entries.push({
@@ -163,7 +192,7 @@ export function buildKnowledgeBase() {
         title: 'Languages',
         text: `Languages: ${skills.languages.map((item) => `${item.name} (${item.level}${item.extra ? `, ${item.extra}` : ''})`).join(', ')}.`,
         answer: `He speaks English (${skills.languages[0].level}, IELTS: 8), German (${skills.languages[1].level}), and Turkish (${skills.languages[2].level}).`,
-        keywords: ['english', 'german', 'turkish', 'languages', 'ielts', 'c1', 'a2', 'native']
+        keywords: cleanKeywords(['english', 'german', 'turkish', 'languages', 'ielts', 'c1', 'a2', 'native'])
     })
 
     entries.push({
@@ -175,7 +204,7 @@ export function buildKnowledgeBase() {
         title: 'Soft Skills',
         text: `Soft skills include ${skills.softSkills.join(', ')}.`,
         answer: `His soft skills include ${skills.softSkills.join(', ')}.`,
-        keywords: ['soft skills', 'teamwork', 'problem solving', 'communication', 'research', ...skills.softSkills.map((item) => normalize(item))]
+        keywords: cleanKeywords(['soft skills', 'teamwork', 'problem solving', 'communication', 'research', ...skills.softSkills.map((item) => normalize(item))])
     })
 
     experience.forEach((item) => {
@@ -192,7 +221,7 @@ export function buildKnowledgeBase() {
             role: item.role,
             highlights: item.highlights,
             technologies: item.technologies,
-            keywords: dedupe([
+            keywords: cleanKeywords([
                 'experience',
                 'internship',
                 'intern',
@@ -217,7 +246,7 @@ export function buildKnowledgeBase() {
             text: `${item.name}. ${item.summary} ${item.highlights.join(' ')}`,
             answer: `${item.name}: ${item.summary}`,
             highlights: item.highlights,
-            keywords: dedupe([
+            keywords: cleanKeywords([
                 item.type.toLowerCase(),
                 'extracurricular',
                 ...tokenize(item.name),
@@ -248,7 +277,7 @@ export function buildKnowledgeBase() {
             href: project.href || null,
             reportUrl: project.reportUrl || null,
             linkedTechProjects,
-            keywords: dedupe([
+            keywords: cleanKeywords([
                 'project',
                 'projects',
                 'built',
@@ -272,7 +301,7 @@ export function buildKnowledgeBase() {
             title: `Technology Link · ${tech}`,
             text: `${tech} appears in these projects: ${projectTitles.join(', ')}.`,
             answer: `${tech} appears in these projects: ${projectTitles.join(', ')}.`,
-            keywords: [tech, 'technology', 'tech', 'used', 'projects', 'experience']
+            keywords: cleanKeywords([tech, 'technology', 'tech', 'used', 'projects', 'experience'])
         })
     })
 
@@ -286,7 +315,7 @@ export function buildKnowledgeBase() {
             title: `FAQ · ${item.question}`,
             text: `${item.question} ${item.answer}`,
             answer: item.answer,
-            keywords: tokenize(item.question)
+            keywords: cleanKeywords(tokenize(item.question))
         })
     })
 
@@ -299,7 +328,7 @@ export function buildKnowledgeBase() {
         title: 'Contact',
         text: 'Use the contact section on cemsarptakim.com for collaboration, internship, or professional opportunities.',
         answer: 'Use the contact section on cemsarptakim.com for collaboration, internship, or professional opportunities.',
-        keywords: ['contact', 'email', 'linkedin', 'reach', 'website', 'hire', 'opportunity', 'collaboration']
+        keywords: cleanKeywords(['contact', 'email', 'linkedin', 'reach', 'website', 'hire', 'opportunity', 'collaboration'])
     })
 
     return entries
